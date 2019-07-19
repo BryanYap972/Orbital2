@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="350dp"
+        android:src="@drawable/rocket"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/register_btn"
+        android:background="@color/colorAccent"
+        android:layout_width="329dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login_btn"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="0dp"
+        android:text="Register"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/colorAccent"
+        android:text="Login"
+        android:textColor="@android:color/white" />
+
+    
+
+
+</RelativeLayout>
