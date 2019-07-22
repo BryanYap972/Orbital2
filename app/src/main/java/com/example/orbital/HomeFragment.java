@@ -112,7 +112,10 @@ public class HomeFragment extends Fragment {
                             modelPost.getpDescr().toLowerCase().contains(searchQuery.toLowerCase())) {
                         postList.add(modelPost);
                     }
-                    postList.add(modelPost);
+                    else {
+                        postList.remove(modelPost);
+                    }
+
 
                     adapterPosts = new AdapterPosts(getActivity(), postList);
                     recyclerView.setAdapter(adapterPosts);
