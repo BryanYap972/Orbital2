@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -67,7 +71,7 @@ public class ProfileFragment extends Fragment {
     String storagePath = "Users_Profile_Cover_Imgs/";
 
     ImageView avatarIv, coverIv;
-    TextView nameTv, emailTv, phoneTv;
+    TextView nameTv, emailTv, phoneTv, descriptionTv, countryTv;
     FloatingActionButton fab;
 
 
@@ -110,6 +114,8 @@ public class ProfileFragment extends Fragment {
         nameTv = view.findViewById(R.id.nameTv);
         emailTv = view.findViewById(R.id.emailTv);
         phoneTv = view.findViewById(R.id.phoneTv);
+        descriptionTv = view.findViewById(R.id.descriptionTv);
+        countryTv = view.findViewById(R.id.countryTv);
         fab = view.findViewById(R.id.fab);
 
         pd = new ProgressDialog(getActivity());
@@ -123,8 +129,10 @@ public class ProfileFragment extends Fragment {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String name = "" + ds.child("name").getValue();
-                    String email= "" + ds.child("email").getValue();
-                    String phone = "" + ds.child("phone").getValue();
+                    String email= "Email: " + ds.child("email").getValue();
+                    String phone = "Phone: " + ds.child("phone").getValue();
+                    String description = "Past exchange experiences: " + ds.child("description").getValue();
+                    String country = "Current exchange country: " + ds.child("country").getValue();
                     String image = "" + ds.child("image").getValue();
                     String cover = "" + ds.child("cover").getValue();
 
@@ -132,6 +140,8 @@ public class ProfileFragment extends Fragment {
                     nameTv.setText(name);
                     emailTv.setText(email);
                     phoneTv.setText(phone);
+                    descriptionTv.setText(description);
+                    countryTv.setText(country);
 
                     try {
                         Picasso.get().load(image).into(avatarIv);
@@ -196,7 +206,7 @@ public class ProfileFragment extends Fragment {
 
 
     private void showEditProfileDialog() {
-        String options[] = {"Edit Profile Picture", "Edit Cover Photo", "Edit Name", "Edit Phone"};
+        String options[] = {"Edit Profile Picture", "Edit Cover Photo", "Edit Name", "Edit Phone", "Edit Country", "Edit Exchange Experiences"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -222,6 +232,14 @@ public class ProfileFragment extends Fragment {
                 else if (which == 3) {
                     pd.setMessage("Updating phone");
                     showNamePhoneUpdateDialog("phone");
+                }
+                else if (which == 4) {
+                    pd.setMessage("Updating exchange country");
+                    showNamePhoneUpdateDialog("country");
+                }
+                else if (which == 5) {
+                    pd.setMessage("Updating exchange experience");
+                    showNamePhoneUpdateDialog("description");
                 }
             }
         });
@@ -436,5 +454,41 @@ public class ProfileFragment extends Fragment {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK);
         galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, IMAGE_PICK_GALLERY_CODE);
+    }
+
+    private void checkUserStatus() {
+        //get current user
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        if (user != null) {
+            //mProfileTv.setText(user.getEmail());
+        }
+        else {
+            startActivity(new Intent(getActivity(), MainActivity.class));
+            getActivity().finish();
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_profile, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_logout) {
+            firebaseAuth.signOut();
+            checkUserStatus();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
