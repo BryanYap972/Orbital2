@@ -85,6 +85,8 @@ public class ProfileFragment extends Fragment {
     String cameraPermissions[];
     String storagePermissions[];
 
+    String uid;
+
     Uri image_uri;
 
     String profileOrCoverPhoto;
@@ -171,6 +173,7 @@ public class ProfileFragment extends Fragment {
                 showEditProfileDialog();
             }
         });
+        checkUserStatus();
 
         return view;
     }
@@ -264,7 +267,7 @@ public class ProfileFragment extends Fragment {
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
-                String value = editText.getText().toString().trim();
+                final String value = editText.getText().toString().trim();
 
                 if(!TextUtils.isEmpty(value)) {
                     pd.show();
@@ -287,6 +290,25 @@ public class ProfileFragment extends Fragment {
                                     Toast.makeText(getActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
+
+                        if (key.equals("name")) {
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                            Query query = ref.orderByChild("uid").equalTo(uid);
+                            query.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                                        String child = ds.getKey();
+                                        dataSnapshot.getRef().child(child).child("uName").setValue(value);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
                 }
                 else {
                     Toast.makeText(getActivity(), "Please enter " + key, Toast.LENGTH_SHORT).show();
@@ -399,7 +421,7 @@ public class ProfileFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
                         while (!uriTask.isSuccessful());
-                        Uri downloadUri = uriTask.getResult();
+                        final Uri downloadUri = uriTask.getResult();
 
                         if (uriTask.isSuccessful()) {
                             HashMap<String, Object> results = new HashMap<>();
@@ -422,6 +444,25 @@ public class ProfileFragment extends Fragment {
 
                                         }
                                     });
+
+                            if (profileOrCoverPhoto.equals("image")) {
+                                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
+                                Query query = ref.orderByChild("uid").equalTo(uid);
+                                query.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                                            String child = ds.getKey();
+                                            dataSnapshot.getRef().child(child).child("uDp").setValue(downloadUri.toString());
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
                         }
                         else {
                             pd.dismiss();
@@ -461,6 +502,8 @@ public class ProfileFragment extends Fragment {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             //mProfileTv.setText(user.getEmail());
+
+            uid = user.getUid();
         }
         else {
             startActivity(new Intent(getActivity(), MainActivity.class));
