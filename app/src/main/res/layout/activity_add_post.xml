@@ -21,13 +21,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/pImageIv"
-            android:src="@drawable/upload"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="200dp"
-            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pImageIv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp" />
+
+            <TextView
+                android:layout_width="224dp"
+                android:layout_height="44dp"
+                android:layout_alignStart="@+id/pImageIv"
+                android:layout_alignLeft="@+id/pImageIv"
+                android:layout_alignEnd="@+id/pImageIv"
+                android:layout_alignRight="@+id/pImageIv"
+                android:layout_alignBottom="@+id/pImageIv"
+                android:layout_gravity="center"
+                android:layout_marginStart="98dp"
+                android:layout_marginLeft="98dp"
+                android:layout_marginEnd="88dp"
+                android:layout_marginRight="88dp"
+                android:layout_marginBottom="80dp"
+                android:text="Click here to add image"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
         <EditText
             android:id="@+id/pDescriptionEt"

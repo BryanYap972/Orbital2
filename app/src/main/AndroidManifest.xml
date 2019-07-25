@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ThereProfileActivity"></activity>
+        <activity android:name=".Aarhus.AddReviewAarhus"></activity>
+        <activity android:name=".Aarhus.AarhusActivity" />
+        <activity android:name=".ThereProfileActivity" />
         <activity android:name=".AddPostActivity" />
         <activity
             android:name=".ChatActivity"
