@@ -6,20 +6,32 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 
+import com.example.orbital.adapters.AdapterUserChatlist;
+import com.example.orbital.adapters.AdapterUsers;
+import com.example.orbital.models.Chatlist;
+import com.example.orbital.models.ModelChat;
+import com.example.orbital.models.ModelUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -27,7 +39,18 @@ import com.google.firebase.auth.FirebaseUser;
  */
 public class ChatListFragment extends Fragment {
 
+    private RecyclerView recyclerView;
+
+    private AdapterUserChatlist adapterUsers;
+    private List<ModelUser> mUsers;
+
     FirebaseAuth firebaseAuth;
+    DatabaseReference reference;
+    FirebaseUser fUser;
+
+    private List<Chatlist> usersList;
+
+
 
     public ChatListFragment() {
         // Required empty public constructor
@@ -42,8 +65,71 @@ public class ChatListFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        recyclerView = view.findViewById(R.id.chatlistRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        usersList = new ArrayList<>();
+
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usersList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Chatlist chatlist = snapshot.getValue(Chatlist.class);
+                    usersList.add(chatlist);
+                }
+
+                chatList();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
         return view;
+
     }
+
+    private void chatList() {
+        mUsers = new ArrayList<>();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mUsers.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    ModelUser user = snapshot.getValue(ModelUser.class);
+
+                    for (Chatlist chatlist : usersList) {
+                        if (!fUser.getUid().equals(user.getUid())) {
+                            if (user.getUid().equals(chatlist.getSender()) || user.getUid().equals(chatlist.getReceiver())) {
+                                if (!mUsers.contains(user)) {
+                                    mUsers.add(user);
+                                }
+                            }
+                        }
+                    }
+                }
+                adapterUsers = new AdapterUserChatlist(getContext(), mUsers);
+                recyclerView.setAdapter(adapterUsers);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void checkUserStatus() {
         //get current user
@@ -68,6 +154,7 @@ public class ChatListFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
 
         menu.findItem(R.id.action_add_post).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
 
 
         super.onCreateOptionsMenu(menu, inflater);

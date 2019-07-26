@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.orbital.BostonU.AddReviewBostonU;
@@ -71,6 +72,7 @@ public class AddPostActivity extends AppCompatActivity {
     String[] storagePermissions;
 
     EditText titleEt, descriptionEt;
+    TextView clickHere;
     ImageView imageIv;
     Button uploadBtn;
 
@@ -102,6 +104,7 @@ public class AddPostActivity extends AppCompatActivity {
 
         titleEt = findViewById(R.id.pTitleEt);
         descriptionEt = findViewById(R.id.pDescriptionEt);
+        clickHere = findViewById(R.id.clickhere);
         imageIv = findViewById(R.id.pImageIv);
         uploadBtn = findViewById(R.id.pUploadBtn);
 
@@ -144,6 +147,7 @@ public class AddPostActivity extends AppCompatActivity {
         imageIv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                clickHere.setText("");
                 showImagePickDialog();
             }
         });

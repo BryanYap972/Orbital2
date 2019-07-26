@@ -53,6 +53,7 @@ public class ChatActivity extends AppCompatActivity {
     ImageButton sendBtn;
 
     FirebaseAuth firebaseAuth;
+    FirebaseUser fUser;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference usersDbRef;
@@ -93,6 +94,7 @@ public class ChatActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         usersDbRef = firebaseDatabase.getReference("Users");
 
@@ -154,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
                     Toast.makeText(ChatActivity.this, "Cannot send empty messgaes", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    sendMessage(message);
+                    sendMessage(myUid, hisUid, message);
                 }
             }
         });
@@ -234,9 +236,10 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-    private void sendMessage(String message) {
+    private void sendMessage(String sender, String receiver, String message) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
         String timestamp = String.valueOf(System.currentTimeMillis());
@@ -249,6 +252,23 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen", false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
+                .child(hisUid);
+
+        chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    chatRef.child("sender").setValue(myUid);
+                    chatRef.child("receiver").setValue(hisUid);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
         messageEt.setText("");
     }
 
