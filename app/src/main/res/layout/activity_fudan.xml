@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Fudan.FudanActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Fudan"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:text="Fudan University"
+            android:textColor="@color/colorBlack"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/UnidescriptionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/Fudan"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginRight="-1dp"
+            android:text="Fudan University, located in Shanghai, is one of the most prestigious and selective universities in China. Founded in 1905, shortly before the end of China's imperial Qing dynasty, Fudan was the first institution of higher education to be founded by a Chinese person, renowned modern educator Ma Xiangbo.
+
+Fudan is a C9 League university and a Chinese Ministry of Education Class A Double First Class University. Fudan is now composed of four campuses in Shanghai – Handan, Fenglin, Zhangjiang, and Jiangwan – which share the same central administration. In the 2018 QS Asian University Ranking, Fudan ranks 2nd in China and No. 7 in Asia."
+            android:textColor="@color/colorBlack" />
+
+
+        <TextView
+            android:id="@+id/reviewTag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UnidescriptionTv"
+            android:layout_marginTop="15dp"
+            android:text="Reviews"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fudanRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewTag"
+            android:layout_marginTop="25dp" />
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
+

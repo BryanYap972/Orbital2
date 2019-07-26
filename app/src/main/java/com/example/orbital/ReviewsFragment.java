@@ -21,7 +21,14 @@ import android.widget.SearchView;
 
 import com.example.orbital.Aarhus.AarhusActivity;
 import com.example.orbital.AlbertLudwig.AlbertLudwigActivity;
+import com.example.orbital.Bilkent.BilkentActivity;
 import com.example.orbital.BostonU.BostonUActivity;
+import com.example.orbital.Carleton.CarletonActivity;
+import com.example.orbital.Chongqing.ChongqingActivity;
+import com.example.orbital.Clarkson.ClarksonActivity;
+import com.example.orbital.Durham.DurhamActivity;
+import com.example.orbital.Fudan.FudanActivity;
+import com.example.orbital.ImperialCollege.ImperialCollegeActivity;
 import com.example.orbital.adapters.AdapterUnis;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -85,6 +92,34 @@ public class ReviewsFragment extends Fragment {
                 }
                 if (position == 2) {
                     Intent intent = new Intent(getActivity(), BostonUActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 3) {
+                    Intent intent = new Intent(getActivity(), BilkentActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 4) {
+                    Intent intent = new Intent(getActivity(), CarletonActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 5) {
+                    Intent intent = new Intent(getActivity(), ChongqingActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 6) {
+                    Intent intent = new Intent(getActivity(), ClarksonActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 7) {
+                    Intent intent = new Intent(getActivity(), DurhamActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 8) {
+                    Intent intent = new Intent(getActivity(), FudanActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 9) {
+                    Intent intent = new Intent(getActivity(), ImperialCollegeActivity.class);
                     startActivity(intent);
                 }
 

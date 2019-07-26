@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".ImperialCollege.ImperialCollegeActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ImperialCollege"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:text="Imperial College London"
+            android:textColor="@color/colorBlack"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/UnidescriptionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/ImperialCollege"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginRight="-1dp"
+            android:text="Imperial College London is a public research university located in London. The main campus is located in South Kensington, with a new innovation campus in White City. The college also has a research centre at Silwood Park, and teaching hospitals throughout London. Imperial is organised through faculties of natural science, engineering, medicine, and business. Its emphasis is on the practical application of science and technology. The university has an international community, with more than 59% of students from outside the UK and 140 countries represented on campus. In 2018–19, Imperial is ranked 8th globally in the QS World University Rankings, 9th in the THE World University Rankings, 24th in the Academic Ranking of World Universities, and 8th in Reuters Top 100: World's Most Innovative Universities. Student, staff, and researcher affiliations include 14 Nobel laureates, 3 Fields Medalists, 1 Turing Award winner, 74 Fellows of the Royal Society, 87 Fellows of the Royal Academy of Engineering, and 85 Fellows of the Academy of Medical Sciences."
+            android:textColor="@color/colorBlack" />
+
+
+        <TextView
+            android:id="@+id/reviewTag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UnidescriptionTv"
+            android:layout_marginTop="15dp"
+            android:text="Reviews"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/imperialCollegeRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewTag"
+            android:layout_marginTop="25dp" />
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
+

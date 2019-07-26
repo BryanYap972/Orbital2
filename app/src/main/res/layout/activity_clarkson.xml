@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".Clarkson.ClarksonActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/Clarkson"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="3dp"
+            android:text="Clarkson University"
+            android:textColor="@color/colorBlack"
+            android:textSize="35sp" />
+
+        <TextView
+            android:id="@+id/UnidescriptionTv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/Clarkson"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="-1dp"
+            android:layout_marginRight="-1dp"
+            android:text="Over our 120+-year history, Clarkson has honed an ecosystem that lets you design your rigorous academics, research and social life to intentionally collide with your own personal passions to create a powerful learning experience.  If you like to roll-up your sleeves to solve open-ended problems, we will get you ready to lead and impact a tech-driven world at the intersections of science, technology, engineering, arts and business.  Defy convention by going beyond the status quo of deep disciplinary knowledge.  Everyone has opportunities and hands-on access to build the mindset and practical skillsets to stretch boundaries.  Clarkson graduates emerge with the entrepreneurial competence to make sense of complex systems and forge connections across people and fields.  One in five alumni already leads as a CEO, senior executive or owner of a company.  "
+            android:textColor="@color/colorBlack" />
+
+
+        <TextView
+            android:id="@+id/reviewTag"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/UnidescriptionTv"
+            android:layout_marginTop="15dp"
+            android:text="Reviews"
+            android:textColor="@color/colorBlack"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/clarksonRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewTag"
+            android:layout_marginTop="25dp" />
+
+
+
+    </RelativeLayout>
+
+
+</ScrollView>
+
+
+
