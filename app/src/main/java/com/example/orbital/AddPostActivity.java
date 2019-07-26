@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.orbital.BostonU.AddReviewBostonU;
 import com.firebase.ui.auth.data.model.Resource;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -153,12 +154,9 @@ public class AddPostActivity extends AppCompatActivity {
                 String title = titleEt.getText().toString().trim();
                 String description = descriptionEt.getText().toString().trim();
 
-                if (TextUtils.isEmpty(title)) {
-                    Toast.makeText(AddPostActivity.this, "Enter title", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(title) && TextUtils.isEmpty(description)) {
+                    Toast.makeText(AddPostActivity.this, "Please enter at least a title or description", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                if (TextUtils.isEmpty(description)) {
-                    Toast.makeText(AddPostActivity.this, "Enter description", Toast.LENGTH_SHORT).show();
                 }
 
                 if (isUpdateKey.equals("editPost")) {
