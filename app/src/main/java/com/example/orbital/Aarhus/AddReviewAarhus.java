@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.orbital.AddPostActivity;
+import com.example.orbital.BostonU.AddReviewBostonU;
 import com.example.orbital.MainActivity;
 import com.example.orbital.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -111,12 +112,9 @@ public class AddReviewAarhus extends AppCompatActivity {
                 String title = titleEt.getText().toString().trim();
                 String description = descriptionEt.getText().toString().trim();
 
-                if (TextUtils.isEmpty(title)) {
-                    Toast.makeText(AddReviewAarhus.this, "Enter title", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(title) && TextUtils.isEmpty(description)) {
+                    Toast.makeText(AddReviewAarhus.this, "Please enter at least a title or description", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                if (TextUtils.isEmpty(description)) {
-                    Toast.makeText(AddReviewAarhus.this, "Enter description", Toast.LENGTH_SHORT).show();
                 }
 
                 if (isUpdateKey.equals("editPost")) {

@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".AlbertLudwig.AlbertLudwigActivity">
+    tools:context=".BostonU.BostonUActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/AlbertLudwig"
+            android:id="@+id/BostonU"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
@@ -20,7 +20,7 @@
             android:layout_marginStart="3dp"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="3dp"
-            android:text="Albert-Ludwig University of Freiburg"
+            android:text="Boston University"
             android:textColor="@color/colorBlack"
             android:textSize="35sp" />
 
@@ -28,17 +28,17 @@
             android:id="@+id/UnidescriptionTv"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignTop="@+id/AlbertLudwig"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginLeft="2dp"
-            android:layout_marginTop="84dp"
-            android:layout_marginEnd="-2dp"
-            android:layout_marginRight="-2dp"
-            android:text="Already a comprehensive university at its founding in 1457, the University of Freiburg still offers undergraduate and graduate studies as well as professorial qualification in all important disciplines today: the humanities, natural and engineering sciences, medicine, law, and theology. This diversity also provides an ideal environment for innovative interdisciplinary studies."
+            android:layout_marginStart="4dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="58dp"
+            android:layout_marginEnd="-4dp"
+            android:layout_marginRight="-4dp"
+            android:text="What compelled the Bill and Melinda Gates Foundation to award Boston University a grant to fight newborn mortality in Zambia? Why did Martin Luther King, Jr. adopt BU as a place where he could hone his message of justice and equality? Why is Boston University ranked #42 in national universities by U.S. News and World Report for 2019? And what is the catalyst that prompts 34,262 students to call BU their home? It’s in our DNA: an inherent desire in each of our students, faculty, and staff to vigorously and dauntlessly pursue knowledge—and embrace the unlimited possibilities that come with it."
             android:textColor="@color/colorBlack" />
 
 
@@ -53,7 +53,7 @@
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albertLudwigRecyclerView"
+            android:id="@+id/bostonURecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/reviewTag"

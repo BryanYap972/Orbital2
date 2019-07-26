@@ -21,6 +21,7 @@ import android.widget.SearchView;
 
 import com.example.orbital.Aarhus.AarhusActivity;
 import com.example.orbital.AlbertLudwig.AlbertLudwigActivity;
+import com.example.orbital.BostonU.BostonUActivity;
 import com.example.orbital.adapters.AdapterUnis;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -80,6 +81,10 @@ public class ReviewsFragment extends Fragment {
                 }
                 if (position == 1) {
                     Intent intent = new Intent(getActivity(), AlbertLudwigActivity.class);
+                    startActivity(intent);
+                }
+                if (position == 2) {
+                    Intent intent = new Intent(getActivity(), BostonUActivity.class);
                     startActivity(intent);
                 }
 

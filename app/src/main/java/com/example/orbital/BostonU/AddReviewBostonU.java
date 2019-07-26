@@ -1,4 +1,4 @@
-package com.example.orbital.AlbertLudwig;
+package com.example.orbital.BostonU;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,8 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.orbital.AlbertLudwig.AddReviewAlbertLudwig;
-import com.example.orbital.BostonU.AddReviewBostonU;
+import com.example.orbital.AddPostActivity;
 import com.example.orbital.MainActivity;
 import com.example.orbital.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,10 +28,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class AddReviewAlbertLudwig extends AppCompatActivity {
+public class AddReviewBostonU extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
     DatabaseReference userDbRef;
@@ -51,7 +51,7 @@ public class AddReviewAlbertLudwig extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_review_albert_ludwig);
+        setContentView(R.layout.activity_add_review_boston_u);
 
         actionBar = getSupportActionBar();
         actionBar.setTitle("Add New Review");
@@ -112,7 +112,7 @@ public class AddReviewAlbertLudwig extends AppCompatActivity {
                 String description = descriptionEt.getText().toString().trim();
 
                 if (TextUtils.isEmpty(title) && TextUtils.isEmpty(description)) {
-                    Toast.makeText(AddReviewAlbertLudwig.this, "Please enter at least a title or description", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddReviewBostonU.this, "Please enter at least a title or description", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -146,13 +146,13 @@ public class AddReviewAlbertLudwig extends AppCompatActivity {
         hashMap.put("pDescr", description);
         hashMap.put("pTime", timeStamp);
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("AlbertLudwig");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("BostonU");
         ref.child(timeStamp).setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         pd.dismiss();
-                        Toast.makeText(AddReviewAlbertLudwig.this, "Review uploaded", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReviewBostonU.this, "Review uploaded", Toast.LENGTH_SHORT).show();
 
                         titleEt.setText("");
                         descriptionEt.setText("");
@@ -162,13 +162,13 @@ public class AddReviewAlbertLudwig extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(AddReviewAlbertLudwig.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReviewBostonU.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     private void loadReviewData(String editPostId) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("AlbertLudwig");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("BostonU");
 
         Query fquery = reference.orderByChild("pId").equalTo(editPostId);
         fquery.addValueEventListener(new ValueEventListener() {
@@ -212,21 +212,21 @@ public class AddReviewAlbertLudwig extends AppCompatActivity {
         hashMap.put("pDescr", description);
         hashMap.put("pImage", "noImage");
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("AlbertLudwig");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("BostonU");
         ref.child(editPostId)
                 .updateChildren(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         pd.dismiss();
-                        Toast.makeText(AddReviewAlbertLudwig.this, "Updated", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReviewBostonU.this, "Updated", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         pd.dismiss();
-                        Toast.makeText(AddReviewAlbertLudwig.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddReviewBostonU.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
