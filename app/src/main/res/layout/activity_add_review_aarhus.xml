@@ -21,28 +21,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <EditText
             android:id="@+id/pDescriptionEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
             android:background="@drawable/editextstyle"
-            android:padding="10dp"
+            android:gravity="start"
             android:hint="Enter Description"
             android:inputType="textCapSentences|textMultiLine"
             android:minHeight="120dp"
-            android:gravity="start"
+            android:padding="10dp" />
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
 
         <Button
             android:id="@+id/pUploadBtn"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            android:text="Upload" />
 
     </LinearLayout>
 

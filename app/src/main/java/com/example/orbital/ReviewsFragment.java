@@ -51,6 +51,16 @@ public class ReviewsFragment extends Fragment {
 
         menuItems.add("Aarhus University");
         menuItems.add("Albert-Ludwig University of Freiburg");
+        menuItems.add("Boston University");
+        menuItems.add("Bilkent University");
+        menuItems.add("Carleton College");
+        menuItems.add("Chongqing University");
+        menuItems.add("Clarkson University");
+        menuItems.add("Durham University");
+        menuItems.add("Fudan University");
+        menuItems.add("Imperial College London");
+
+
 
         View view =  inflater.inflate(R.layout.fragment_reviews, container, false);
 

@@ -115,12 +115,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 showMoreOptions(myHolder.moreBtn, uid, myUid, pId, pImage);
             }
         });
-        myHolder.commentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Comment", Toast.LENGTH_SHORT).show();
-            }
-        });
 
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -273,7 +267,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             pTitleTv = itemView.findViewById(R.id.pTitleTv);
             pDescriptionTv = itemView.findViewById(R.id.pDescriptionTv);
             moreBtn = itemView.findViewById(R.id.moreBtn);
-            commentBtn = itemView.findViewById(R.id.commentBtn);
             profileLayout = itemView.findViewById(R.id.profileLayout);
         }
     }

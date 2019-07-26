@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.orbital.AddPostActivity;
 import com.example.orbital.R;
+import com.example.orbital.ReviewsFragment;
 import com.example.orbital.ThereProfileActivity;
 import com.example.orbital.models.ModelReviews;
 import com.google.firebase.auth.FirebaseAuth;
@@ -105,8 +106,6 @@ public class AdapterAarhus extends RecyclerView.Adapter<AdapterAarhus.MyHolder> 
             }
         });
 
-
-
     }
 
     private void showMoreOptions(ImageButton moreBtn, String uid, String myUid, final String pId) {
@@ -122,9 +121,6 @@ public class AdapterAarhus extends RecyclerView.Adapter<AdapterAarhus.MyHolder> 
                     int id = menuItem.getItemId();
                     if (id == 0) {
                         beginDelete(pId);
-                        Intent intent = new Intent(context, AarhusActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
                     }
                     else if (id == 1) {
                         Intent intent = new Intent(context, AddReviewAarhus.class);
@@ -153,10 +149,9 @@ public class AdapterAarhus extends RecyclerView.Adapter<AdapterAarhus.MyHolder> 
 
                 for (DataSnapshot ds: dataSnapshot.getChildren()) {
                     ds.getRef().removeValue();
-                    Toast.makeText(context, "Review has been deleted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Review has been deleted, please refresh to see changes", Toast.LENGTH_SHORT).show();
                     pd.dismiss();
                 }
-
             }
 
             @Override
