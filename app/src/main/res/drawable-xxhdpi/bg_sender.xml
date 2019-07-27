@@ -12,10 +12,10 @@
             <shape android:shape="rectangle">
                 <corners android:radius="4dp" />
                 <padding
-                    android:bottom="1px"
+                    android:bottom="10px"
                     android:left="1px"
                     android:right="1px" />
-                <solid android:color="#01000000" />
+                <solid android:color="#DCF8C6" />
             </shape>
         </rotate>
     </item>
@@ -26,7 +26,7 @@
                 android:bottom="1px"
                 android:left="1px"
                 android:right="1px" />
-            <solid android:color="#01000000" />
+            <solid android:color="#DCF8C6" />
         </shape>
     </item>
 
@@ -41,15 +41,15 @@
             <shape android:shape="rectangle">
                 <corners android:radius="4dp" />
                 <padding android:bottom="1px" />
-                <solid android:color="#09000000" />
+                <solid android:color="#DCF8C6" />
             </shape>
         </rotate>
     </item>
-    <item android:right="10dp">
+    <item android:right="1dp">
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
             <padding android:bottom="1px" />
-            <solid android:color="#09000000" />
+            <solid android:color="#DCF8C6" />
         </shape>
     </item>
 
@@ -67,18 +67,19 @@
                     android:bottom="1px"
                     android:left="1px"
                     android:right="1px" />
-                <solid android:color="#10000000" />
+                <solid android:color="#DCF8C6" />
             </shape>
         </rotate>
     </item>
-    <item android:right="10dp">
+
+    <item android:right="1dp">
         <shape android:shape="rectangle">
             <corners android:radius="4dp" />
             <padding
                 android:bottom="1px"
                 android:left="1px"
                 android:right="1px" />
-            <solid android:color="#10000000" />
+            <solid android:color="#DCF8C6" />
         </shape>
     </item>
 
@@ -94,13 +95,14 @@
             android:pivotY="0%"
             android:toDegrees="0">
             <shape android:shape="rectangle">
-                <solid android:color="#89ad40" />
+                <solid android:color="#DCF8C6" />
             </shape>
         </rotate>
     </item>
-    <item android:right="10dp">
+
+    <item android:right="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="#89ad40" />
+            <solid android:color="#DCF8C6" />
             <corners android:radius="4dp" />
         </shape>
     </item>
