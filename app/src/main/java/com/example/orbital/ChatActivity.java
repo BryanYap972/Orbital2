@@ -252,14 +252,16 @@ public class ChatActivity extends AppCompatActivity {
         hashMap.put("isSeen", false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
-        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist")
-                .child(hisUid);
+
+        final DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("Chatlist");
 
         chatRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    chatRef.child("sender").setValue(myUid);
-                    chatRef.child("receiver").setValue(hisUid);
+                HashMap<String, Object> hashMap1 = new HashMap<>();
+                hashMap1.put("sender", myUid);
+                hashMap1.put("receiver", hisUid);
+                chatRef.push().setValue(hashMap1);
 
             }
 

@@ -80,7 +80,10 @@ public class ChatListFragment extends Fragment {
                 usersList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Chatlist chatlist = snapshot.getValue(Chatlist.class);
-                    usersList.add(chatlist);
+                    if (chatlist.getSender().equals(fUser.getUid()) || chatlist.getReceiver().equals(fUser.getUid())) {
+                        usersList.add(chatlist);
+                    }
+
                 }
 
                 chatList();
@@ -110,13 +113,11 @@ public class ChatListFragment extends Fragment {
                     ModelUser user = snapshot.getValue(ModelUser.class);
 
                     for (Chatlist chatlist : usersList) {
-                        if (!fUser.getUid().equals(user.getUid())) {
                             if (user.getUid().equals(chatlist.getSender()) || user.getUid().equals(chatlist.getReceiver())) {
-                                if (!mUsers.contains(user)) {
+                                if (!mUsers.contains(user) &&  !fUser.getUid().equals(user.getUid())) {
                                     mUsers.add(user);
                                 }
                             }
-                        }
                     }
                 }
                 adapterUsers = new AdapterUserChatlist(getContext(), mUsers);

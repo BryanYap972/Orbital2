@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textColor="@color/colorBlack"
-                android:text="messagggggggggggggge"/>
+                android:text=""/>
 
         </LinearLayout>
 
