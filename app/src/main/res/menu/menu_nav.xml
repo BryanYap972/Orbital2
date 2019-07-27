@@ -7,7 +7,7 @@
 
     <item android:id="@+id/nav_review"
         android:title="Reviews"
-        android:icon="@drawable/ic_comment_pink"/>
+        android:icon="@drawable/ic_review_pink"/>
 
     <item android:id="@+id/nav_users"
         android:title="Users"
@@ -15,7 +15,7 @@
 
     <item android:id="@+id/nav_chat"
         android:title="Chats"
-        android:icon="@drawable/ic_chatlist_pink" />
+        android:icon="@drawable/ic_comment_pink" />
 
     <item android:id="@+id/nav_profile"
         android:title="Profile"
