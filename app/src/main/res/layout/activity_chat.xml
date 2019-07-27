@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:background="#F1EDED"
     tools:context=".ChatActivity">
-    
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="67dp"
         android:background="@color/colorPrimaryDark"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -19,16 +19,16 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_default"
-            app:c_background_color="@color/colorPrimaryDark"/>
+            android:src="@drawable/ic_default_img_pink"
+            app:c_background_color="@color/colorWhite" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
             android:gravity="center"
-            android:layout_marginLeft="20dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nameTv"
@@ -37,7 +37,16 @@
                 android:text="Name"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/emailTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textColor="@color/colorWhite"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/userStatusTv"
@@ -45,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:text="online"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 

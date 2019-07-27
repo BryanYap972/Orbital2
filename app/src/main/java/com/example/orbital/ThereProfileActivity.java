@@ -8,9 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.orbital.models.Chatlist;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +30,7 @@ public class ThereProfileActivity extends AppCompatActivity {
 
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv, phoneTv, descriptionTv, countryTv;
+    FloatingActionButton fab;
 
     String uid;
 
@@ -46,6 +51,7 @@ public class ThereProfileActivity extends AppCompatActivity {
         phoneTv = findViewById(R.id.phoneTv);
         descriptionTv = findViewById(R.id.descriptionTv);
         countryTv = findViewById(R.id.countryTv);
+        fab = findViewById(R.id.fab);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -74,6 +80,15 @@ public class ThereProfileActivity extends AppCompatActivity {
                     descriptionTv.setText(description);
                     countryTv.setText(country);
 
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(ThereProfileActivity.this, ChatActivity.class);
+                            intent.putExtra("hisUid", uid);
+                            startActivity(intent);
+                        }
+                    });
+
                     try {
                         Picasso.get().load(image).into(avatarIv);
                     }
@@ -96,6 +111,7 @@ public class ThereProfileActivity extends AppCompatActivity {
             }
         });
 
+
         checkUserStatus();
     }
 
@@ -111,6 +127,10 @@ public class ThereProfileActivity extends AppCompatActivity {
             finish();
         }
     }
+
+
+
+
 
     @Override
     public boolean onSupportNavigateUp() {

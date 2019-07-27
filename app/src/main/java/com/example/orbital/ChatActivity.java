@@ -48,7 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     Toolbar toolbar;
     RecyclerView recyclerView;
     ImageView profileIv;
-    TextView nameTv, userStatusTv;
+    TextView nameTv, userStatusTv, emailTv;
     EditText messageEt;
     ImageButton sendBtn;
 
@@ -80,6 +80,8 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chat_recyclerView);
         profileIv = findViewById(R.id.profileIv);
         nameTv = findViewById(R.id.nameTv);
+        emailTv = findViewById(R.id.emailTv);
+
         userStatusTv = findViewById(R.id.userStatusTv);
         messageEt = findViewById(R.id.messageEt);
         sendBtn = findViewById(R.id.sendBtn);
@@ -106,6 +108,8 @@ public class ChatActivity extends AppCompatActivity {
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     String name = "" + ds.child("name").getValue();
                     hisImage = "" + ds.child("image").getValue();
+                    String email = "" + ds.child("email").getValue();
+
                     String typingStatus = "" + ds.child("typingTo").getValue();
 
                     if (typingStatus.equals(myUid)) {
@@ -129,13 +133,14 @@ public class ChatActivity extends AppCompatActivity {
 
 
                     nameTv.setText(name);
+                    emailTv.setText(email);
 
 
                     try{
-                        Picasso.get().load(hisImage).placeholder(R.drawable.ic_default).into(profileIv);
+                        Picasso.get().load(hisImage).placeholder(R.drawable.ic_default_img_pink).into(profileIv);
                     }
                     catch (Exception e){
-                        Picasso.get().load(R.drawable.ic_default).into(profileIv);
+
                     }
 
                 }
