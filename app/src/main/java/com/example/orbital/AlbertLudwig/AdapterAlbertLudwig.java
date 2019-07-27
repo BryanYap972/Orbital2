@@ -123,9 +123,6 @@ public class AdapterAlbertLudwig extends RecyclerView.Adapter<AdapterAlbertLudwi
                     int id = menuItem.getItemId();
                     if (id == 0) {
                         beginDelete(pId);
-                        Intent intent = new Intent(context, AlbertLudwigActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
                     }
                     else if (id == 1) {
                         Intent intent = new Intent(context, AddReviewAlbertLudwig.class);

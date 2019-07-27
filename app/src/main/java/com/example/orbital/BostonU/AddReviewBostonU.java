@@ -15,7 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.orbital.AddPostActivity;
+
+import com.example.orbital.BostonU.AddReviewBostonU;
 import com.example.orbital.MainActivity;
 import com.example.orbital.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +29,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 

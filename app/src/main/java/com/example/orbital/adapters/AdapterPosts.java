@@ -49,9 +49,11 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     String myUid;
 
+    //Constructor for AdapaterPosts
     public AdapterPosts(Context context, List<ModelPost> postList) {
         this.context = context;
         this.postList = postList;
+        //Get current user id
         myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
@@ -59,6 +61,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
+        //Use row_posts layout for posts
         View view = LayoutInflater.from(context).inflate(R.layout.row_posts, viewGroup, false);
         return new MyHolder(view);
     }
@@ -66,6 +69,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     @Override
     public void onBindViewHolder(@NonNull final MyHolder myHolder, int i) {
 
+        //Retrieve information from posts from firebase
         final String uid = postList.get(i).getUid();
         String uEmail = postList.get(i).getuEmail();
         String uName = postList.get(i).getuName();
@@ -80,17 +84,18 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         calendar.setTimeInMillis(Long.parseLong(pTimeStamp));
         String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
 
+        //Set text views with retrieved information from firebase
         myHolder.uNameTv.setText(uName);
         myHolder.pTimeTv.setText(pTime);
         myHolder.pTitleTv.setText(pTitle);
         myHolder.pDescriptionTv.setText(pDescription);
 
-
+        //If there is no image uploaded for the post, remove image view
         if (pImage.equals("noImage")) {
             myHolder.pImageIv.setVisibility(View.GONE);
         }
         else {
-
+            //show image view and put image in image view
             myHolder.pImageIv.setVisibility(View.VISIBLE);
 
             try {
@@ -102,13 +107,14 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         }
 
         try {
+            //Put profile picture in profile picture image view
             Picasso.get().load(uDp).placeholder(R.drawable.ic_default_img_pink).into(myHolder.uPictureIv);
         }
         catch (Exception e) {
 
         }
 
-
+        //Show options when user clicks on the more button
         myHolder.moreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,6 +122,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             }
         });
 
+        //Redirect user to the profile page of the user that they clicked on
         myHolder.profileLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +137,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
     }
 
+    //Popup menu for when user clicks on the more button.
+    //Shows options to delete or edit post
     private void showMoreOptions(ImageButton moreBtn, String uid, String myUid, final String pId, final String pImage) {
         PopupMenu popupMenu = new PopupMenu(context, moreBtn, Gravity.END);
 
@@ -139,7 +148,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
         }
 
-
+        //
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

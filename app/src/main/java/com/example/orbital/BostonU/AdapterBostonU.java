@@ -125,7 +125,7 @@ public class AdapterBostonU extends RecyclerView.Adapter<AdapterBostonU.MyHolder
                         beginDelete(pId);
                     }
                     else if (id == 1) {
-                        Intent intent = new Intent(context, AddReviewAarhus.class);
+                        Intent intent = new Intent(context, AddReviewBostonU.class);
                         intent.putExtra("key", "editPost");
                         intent.putExtra("editPostId", pId);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
