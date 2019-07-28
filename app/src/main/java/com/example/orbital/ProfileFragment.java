@@ -136,7 +136,7 @@ public class ProfileFragment extends Fragment {
                     String name = "" + ds.child("name").getValue();
                     String email= "Email: " + ds.child("email").getValue();
                     String phone = "Phone: " + ds.child("phone").getValue();
-                    String description = "Past exchange experiences: " + ds.child("description").getValue();
+                    String description = "Past exchange experiences: " + ds.child("exchange experiences").getValue();
                     String country = "Current exchange country: " + ds.child("country").getValue();
                     String image = "" + ds.child("image").getValue();
                     String cover = "" + ds.child("cover").getValue();
@@ -244,8 +244,8 @@ public class ProfileFragment extends Fragment {
                     showNamePhoneUpdateDialog("country");
                 }
                 else if (which == 5) {
-                    pd.setMessage("Updating exchange experience");
-                    showNamePhoneUpdateDialog("description");
+                    pd.setMessage("Updating exchange experiences");
+                    showNamePhoneUpdateDialog("exchange experiences");
                 }
             }
         });
