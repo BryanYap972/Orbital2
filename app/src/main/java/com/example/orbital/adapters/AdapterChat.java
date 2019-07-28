@@ -163,7 +163,7 @@ public class AdapterChat extends RecyclerView.Adapter<AdapterChat.MyHolder> {
                     }
                     else {
                         //If user was not the one who sent the message, do not delete message and info user that they are not able to delete message
-                        Toast.makeText(context, "You can only deleted your messages", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "You can only delete your messages", Toast.LENGTH_SHORT).show();
                     }
 
                 }

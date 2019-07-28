@@ -39,6 +39,7 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
 
     String theLastMessage;
 
+    //Constructor for chat list adapter
     public AdapterUserChatlist(Context context, List<ModelUser> userList) {
         this.context = context;
         this.userList = userList;
@@ -47,6 +48,7 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        //Apply row_userschat layout for users in chat list
         View view = LayoutInflater.from(context).inflate(R.layout.row_userschat, viewGroup, false);
 
         return new MyHolder(view);
@@ -62,9 +64,14 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
         String userName = userList.get(i).getName();
         final String userEmail = userList.get(i).getEmail();
 
+        //Retrieve last message sent in chat
         lastMessage(user.getUid(), myHolder.mMessageTv);
+
+        //Set name text view and email text view with user's info
         myHolder.mNameTv.setText(userName);
         myHolder.mEmailTv.setText(userEmail);
+
+        //load user's profile picture into image view
         try {
             Picasso.get().load(userImage)
                     .placeholder(R.drawable.ic_default_img_pink)
@@ -74,6 +81,7 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
 
         }
 
+        //show option to go to profile or chat when user clicks on another user in the chatlist
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,11 +90,13 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
                 builder.setItems(new String[]{"Profile", "Chat"}, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //Redirect user to the profile of the user they clicked on
                         if (which == 0) {
                             Intent intent = new Intent(context, ThereProfileActivity.class);
                             intent.putExtra("uid", hisUID);
                             context.startActivity(intent);
                         }
+                        //Redirect user to the chat
                         if (which == 1) {
                             Intent intent = new Intent(context, ChatActivity.class);
                             intent.putExtra("hisUid", hisUID);
@@ -122,6 +132,7 @@ public class AdapterUserChatlist extends RecyclerView.Adapter<AdapterUserChatlis
 
     }
 
+    //Method to find and set the last message of the chat into the last_msg text view
     private void lastMessage(final String userid, final TextView last_msg) {
 
         theLastMessage = "default";

@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -44,6 +45,10 @@ public class UsersFragment extends Fragment {
     List<ModelUser> userList;
 
     FirebaseAuth firebaseAuth;
+
+    FirebaseUser fUser;
+
+    String myUid;
 
 
 
@@ -59,6 +64,8 @@ public class UsersFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_users, container, false);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUid = fUser.getUid();
 
         recyclerView = view.findViewById(R.id.users_recyclerView);
 
@@ -144,6 +151,7 @@ public class UsersFragment extends Fragment {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
             //mProfileTv.setText(user.getEmail());
+            myUid = user.getUid();
         }
         else {
             startActivity(new Intent(getActivity(), MainActivity.class));
@@ -209,6 +217,14 @@ public class UsersFragment extends Fragment {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

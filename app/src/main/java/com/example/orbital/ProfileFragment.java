@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
 
     FirebaseAuth firebaseAuth;
     FirebaseUser user;
+    FirebaseUser fUser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -85,7 +86,7 @@ public class ProfileFragment extends Fragment {
     String cameraPermissions[];
     String storagePermissions[];
 
-    String uid;
+    String uid, myUid;
 
     Uri image_uri;
 
@@ -104,6 +105,8 @@ public class ProfileFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         user = firebaseAuth.getCurrentUser();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUid = fUser.getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("Users");
         storageReference = getInstance().getReference();
@@ -528,6 +531,13 @@ public class ProfileFragment extends Fragment {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
             firebaseAuth.signOut();
             checkUserStatus();
         }

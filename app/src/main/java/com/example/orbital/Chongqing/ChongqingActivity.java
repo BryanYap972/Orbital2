@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ChongqingActivity extends AppCompatActivity {
@@ -35,6 +36,8 @@ public class ChongqingActivity extends AppCompatActivity {
 
     ActionBar actionBar;
 
+    FirebaseUser fUser;
+    String myUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,8 @@ public class ChongqingActivity extends AppCompatActivity {
         actionBar.setTitle("Chongqing University");
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUid = fUser.getUid();
 
         recyclerView = this.findViewById(R.id.chongqingRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -83,7 +88,7 @@ public class ChongqingActivity extends AppCompatActivity {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
-            //mProfileTv.setText(user.getEmail());
+            myUid = fUser.getUid();
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
@@ -107,6 +112,14 @@ public class ChongqingActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

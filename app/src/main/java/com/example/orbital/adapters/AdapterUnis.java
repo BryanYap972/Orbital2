@@ -15,6 +15,7 @@ public class AdapterUnis extends ArrayAdapter {
 
     ArrayList<String> items;
 
+    //Constructor for university adapters
     public AdapterUnis(Context context, int layout, ArrayList<String> items) {
 
         super(context,layout);
@@ -22,6 +23,7 @@ public class AdapterUnis extends ArrayAdapter {
 
     }
 
+    //Update method for
     public void update(ArrayList<String> results) {
         items = new ArrayList<>();
         items.addAll(results);

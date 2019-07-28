@@ -65,7 +65,7 @@ public class ChatActivity extends AppCompatActivity {
     AdapterChat adapterChat;
 
     String hisUid;
-    String myUid;
+    String myUid, uid;
     String hisImage;
 
 
@@ -97,6 +97,7 @@ public class ChatActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         fUser = FirebaseAuth.getInstance().getCurrentUser();
+        uid = fUser.getUid();
         firebaseDatabase = FirebaseDatabase.getInstance();
         usersDbRef = firebaseDatabase.getReference("Users");
 
@@ -311,7 +312,6 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         checkUserStatus();
-        checkOnlineStatus("online");
         super.onStart();
     }
 
@@ -319,16 +319,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-        String timestamp = String.valueOf(System.currentTimeMillis());
-
-        checkOnlineStatus(timestamp);
         checkTypingStatus("noOne");
         userRefForSeen.removeEventListener(seenListener);
     }
 
     @Override
     protected void onResume() {
-        checkOnlineStatus("online");
         super.onResume();
     }
 
@@ -347,6 +343,14 @@ public class ChatActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(uid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

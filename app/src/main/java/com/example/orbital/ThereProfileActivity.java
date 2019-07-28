@@ -19,20 +19,24 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+
 public class ThereProfileActivity extends AppCompatActivity {
 
     FirebaseAuth firebaseAuth;
+    FirebaseUser fUser;
 
     ImageView avatarIv, coverIv;
     TextView nameTv, emailTv, phoneTv, descriptionTv, countryTv;
     FloatingActionButton fab;
 
-    String uid;
+    String uid, myUid, userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class ThereProfileActivity extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        userId = fUser.getUid();
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("uid");
@@ -121,11 +127,37 @@ public class ThereProfileActivity extends AppCompatActivity {
         if (user != null) {
             //mProfileTv.setText(user.getEmail());
 
+            myUid = user.getUid();
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
+    }
+
+    private void checkOnlineStatus(String status) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("onlineStatus", status);
+
+        dbRef.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onStart() {
+        checkUserStatus();
+        super.onStart();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
 
@@ -150,6 +182,14 @@ public class ThereProfileActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

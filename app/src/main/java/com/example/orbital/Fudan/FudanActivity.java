@@ -24,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class FudanActivity extends AppCompatActivity {
@@ -36,6 +37,9 @@ public class FudanActivity extends AppCompatActivity {
 
     ActionBar actionBar;
 
+    FirebaseUser fUser;
+    String myUid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,8 @@ public class FudanActivity extends AppCompatActivity {
         actionBar.setTitle("Fudan University");
 
         firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUid = fUser.getUid();
 
         recyclerView = this.findViewById(R.id.fudanRecyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -84,7 +90,7 @@ public class FudanActivity extends AppCompatActivity {
         //get current user
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if (user != null) {
-            //mProfileTv.setText(user.getEmail());
+            myUid = fUser.getUid();
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
@@ -108,6 +114,14 @@ public class FudanActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }

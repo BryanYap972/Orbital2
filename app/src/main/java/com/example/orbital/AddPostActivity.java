@@ -76,7 +76,7 @@ public class AddPostActivity extends AppCompatActivity {
     ImageView imageIv;
     Button uploadBtn;
 
-    String name, email, uid, dp;
+    String name, email, uid, dp, myUid;
 
     String editTitle, editDescription, editImage;
 
@@ -601,6 +601,7 @@ public class AddPostActivity extends AppCompatActivity {
             //mProfileTv.setText(user.getEmail());
             email = user.getEmail();
             uid = user.getUid();
+            myUid = user.getUid();
         }
         else {
             startActivity(new Intent(this, MainActivity.class));
@@ -629,11 +630,24 @@ public class AddPostActivity extends AppCompatActivity {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            checkOnlineStatus(timestamp);
+
+
             firebaseAuth.signOut();
             checkUserStatus();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void checkOnlineStatus(String status) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("onlineStatus", status);
+
+        dbRef.updateChildren(hashMap);
     }
 
 

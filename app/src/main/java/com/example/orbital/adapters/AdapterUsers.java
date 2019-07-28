@@ -29,6 +29,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     Context context;
     List<ModelUser> userList;
 
+    //Constructor for users adapter
     public AdapterUsers(Context context, List<ModelUser> userList) {
         this.context = context;
         this.userList = userList;
@@ -37,6 +38,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        //Use row_users layout for to display users
         View view = LayoutInflater.from(context).inflate(R.layout.row_users, viewGroup, false);
 
         return new MyHolder(view);
@@ -51,6 +53,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         String userName = userList.get(i).getName();
         final String userEmail = userList.get(i).getEmail();
 
+        //Set name and email text view with user's info
         myHolder.mNameTv.setText(userName);
         myHolder.mEmailTv.setText(userEmail);
         try {
@@ -62,6 +65,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
 
         }
 
+        //show option to go to profile or chat when user clicks on another user in the users section
         myHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

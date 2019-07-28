@@ -36,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView notHaveAccountTv, mRecoverPassTv;
     Button mLoginBtn;
 
+    String myUid;
+
     //Declare an instance of FirebaseAuth
     private FirebaseAuth mAuth;
 
@@ -189,6 +191,9 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             DatabaseReference reference = database.getReference("Users");
 
+                            myUid = user.getUid();
+
+                            checkOnlineStatus("online");
 
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                             finish();
@@ -217,5 +222,13 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
+    }
+
+    private void checkOnlineStatus(String status) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("onlineStatus", status);
+
+        dbRef.updateChildren(hashMap);
     }
 }

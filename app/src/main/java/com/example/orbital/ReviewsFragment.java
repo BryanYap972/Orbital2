@@ -32,8 +32,11 @@ import com.example.orbital.ImperialCollege.ImperialCollegeActivity;
 import com.example.orbital.adapters.AdapterUnis;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -47,6 +50,9 @@ public class ReviewsFragment extends Fragment {
 
     ListView listView;
 
+    FirebaseUser fUser;
+
+    String myUid;
 
     public ReviewsFragment() {
         // Required empty public constructor
@@ -56,6 +62,10 @@ public class ReviewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        fUser = FirebaseAuth.getInstance().getCurrentUser();
+        myUid = fUser.getUid();
 
         menuItems.add("Aarhus University");
         menuItems.add("Albert-Ludwig University of Freiburg");
@@ -190,6 +200,14 @@ public class ReviewsFragment extends Fragment {
 
         int id = item.getItemId();
         if(id == R.id.action_logout) {
+            String timestamp = String.valueOf(System.currentTimeMillis());
+
+            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users").child(myUid);
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("onlineStatus", timestamp);
+
+            dbRef.updateChildren(hashMap);
+
             firebaseAuth.signOut();
             checkUserStatus();
         }
