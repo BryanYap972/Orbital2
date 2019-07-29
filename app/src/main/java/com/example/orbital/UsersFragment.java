@@ -81,7 +81,6 @@ public class UsersFragment extends Fragment {
     }
 
     private void getAllUsers() {
-        final FirebaseUser fUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
 
